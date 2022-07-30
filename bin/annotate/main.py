@@ -1,23 +1,13 @@
-# main
+import datetime
 
+def getDate(regex):
+    curDateTime= datetime.datetime.now()
+    curDateTimeForm = curDateTime.strftime(regex)
+    return curDateTimeForm
 
-# load files r
-    # load config
-    # load recent file list
-    # load notebooks r
+#needs input bugfixing: very easy to write wrong input!
+    # tooltip as guide which expressions to use
+    # and also try except and formatting help while entering
+dateRegex = str(input("Please input the REGEX . . . . . I AM HUNGWY"))
 
-# open window
-
-# open last notebook
-    # open notebook r
-
-
-# notebook
-    # savefile (Saves locations of all the pages, as well as a copy of all pages in itself)
-        # path
-        # name
-        # date (created, last edited, for each page)
-    # pages
-        # title (e.g. date (possibly regex), custom, page number, regex)
-        # number
-    # filesystem (lets people create fs based on page structure, folders are named by page title, and some regex)
+print(getDate(dateRegex))
