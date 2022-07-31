@@ -15,10 +15,20 @@
 ## _NOTEBOOK_ system
     
 + __savefile__ (Saves locations of all the pages, as well as a copy of all pages in itself)
-    + path
-    + name
-    + date (created, last edited, for each page)
+  + path
+  + name
+  + date (created, last edited, for each page)
 + __pages__
-    + title (e.g. date (possibly regex), custom, page number, regex)
-    + number
+  + title (e.g. date (possibly regex), custom, page number, regex)
+  + number
 + __filesystem__ (lets people create fs based on page structure, folders are named by page title, and some regex)
+
+---
+
+## Settings
+
++ timezone & date
++ language
+  + _var (int):_ __lang__
+  + english (0), german (1)
++ 
