@@ -13,14 +13,15 @@ langDateFormatValuesLoaded = [x[lang] for x in langDateFormatValues]
 dateFormatCodes = ["a", "A", "w", "d", "b", "B", "m", "y", "Y", "H", "I", "p", "M", "S", "f", "z", "Z", "j", "U", "W", "c", "x", "X", "%", "G", "u", "V"]
 prefixdateFormatCodes = "%"
 
+# turns format string into formatted date/time
 def getDate(format):
     curDateTime= datetime.datetime.now()
     curDateTimeForm = curDateTime.strftime(format)
     return curDateTimeForm
 
-# needs input bugfixing: very easy to write wrong input!
+# ((needs input bugfixing: very easy to write wrong input!))
     # tooltip as guide which expressions to use
-    # and also try except and formatting help while entering
+    # and also try except and formatting help while entering -->> !! still improvable !!
 def checkDateFormat():
     while True:
         try:
