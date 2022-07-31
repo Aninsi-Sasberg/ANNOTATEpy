@@ -1,6 +1,6 @@
 import datetime
 
-#language read from settings.txt
+# language read from settings.txt
 lang = 0
 '''still needs to be implemented'''
 
@@ -13,15 +13,36 @@ langDateFormatValuesLoaded = [x[lang] for x in langDateFormatValues]
 dateFormatCodes = ["a", "A", "w", "d", "b", "B", "m", "y", "Y", "H", "I", "p", "M", "S", "f", "z", "Z", "j", "U", "W", "c", "x", "X", "%", "G", "u", "V"]
 prefixdateFormatCodes = "%"
 
-def getDate(regex):
+def getDate(format):
     curDateTime= datetime.datetime.now()
-    curDateTimeForm = curDateTime.strftime(regex)
+    curDateTimeForm = curDateTime.strftime(format)
     return curDateTimeForm
 
-#needs input bugfixing: very easy to write wrong input!
+# needs input bugfixing: very easy to write wrong input!
     # tooltip as guide which expressions to use
     # and also try except and formatting help while entering
-dateRegex = str(input("Please input the REGEX . . . . . I AM HUNGWY"))
-'''needs to be fixed'''
+def checkDateFormat():
+    while True:
+        try:
+            indexPercentDateFormat = []
+            dateFormat = str(input("Please input the REGEX . . . . . I AM HUNGWY"))
+            
+            indexPercentDateFormat = [x for x in range(len(dateFormat)) if dateFormat.startswith('%', x)]
+            if not indexPercentDateFormat:
+                raise ValueError("There is no date format code in input.")
 
-# print(getDate(dateRegex))
+            indexDateFormatCodes = [dateFormatCodes.find(dateFormat[x + 1]) for x in indexPercentDateFormat]
+            break
+        except ValueError as errorMess:
+            print(errorMess)
+        except:
+            print("This isn't a valid formatting. Check the date format codes for further reference.")
+    
+    return dateFormat
+'''needs to be tested'''
+
+
+
+dateFormatPass = checkDateFormat()
+
+print(getDate(dateFormatPass))
