@@ -55,4 +55,25 @@ commandline implementation with same features
 + language
   + _var (int):_ __lang__
   + english (0), german (1)
-+ 
+
+---
+
+## Modularisation
+
++ [main](../bin/annotate/main.py)
+  + run all methods and so on in the correct order
++ date
+  + handles all date formatting
++ gui
+  + handles all the gui
++ terminal
+  + handles terminal execution
+
+---
+
+## References
+
++ date
+  + [python datetime module](https://docs.python.org/3/library/datetime.html)
++ list comprehensions
+  + 
