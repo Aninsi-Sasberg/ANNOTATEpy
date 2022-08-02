@@ -1,7 +1,9 @@
 <style>
+  
   *{
     font-family: IBM Plex Mono;
   }
+
 
 
 </style>
@@ -11,16 +13,15 @@
 
 ## ORDER
 
+```python
+"OVERTHINK THIS". :)))))))))))))))
 ```
-OVERTHINK THIS. :)))))))))))))))
-```
-
 1. load files r
     + load config
     + load recent file list (recentFiles, located in [data.xml](../filesystem/data.xml "open the file 'data.xml'"))
-    + load notebooks r
-2. open last notebook
-    + open notebook r
+    + load notebooks/lists r (read so preview can be shown)
+2. open last notebook/list
+    + open notebook rw
 3. open window
 
 ---
@@ -81,6 +82,10 @@ commandline implementation with same features
 
 ## DATE
 
+<mark>
+ADD STUFF.
+</mark>
+
 ---
 
 ## Modularisation
@@ -95,6 +100,22 @@ commandline implementation with same features
   + handles all the [gui](#gui "read about the GUI")
 + terminal
   + handles [terminal execution](#terminal "read about the terminal execution")
+
+
++ [settings](../filesystem/settings.xml "open the file 'settings.xml'")
+  + language = lang
+  + timezone = time
++ [data](../filesystem/data.xml "open the file 'data.xml'")
+  + recent files = "recent"
++ [notebooks](../filesystem/notebooks.xml "open the file 'notebooks.xml'")
+  + notebook
+    + path
+    + title
+    + style -> css
+    + length in 'pages' = len
++ [lists](../filesystem/lists.xml "open the file 'lists.xml'")
+  + list
+    + entries = ent
 
 ---
 
