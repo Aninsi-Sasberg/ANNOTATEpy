@@ -11,7 +11,7 @@ langDateFormatValues = [("Weekday as locale’s abbreviated name.", "Wochentag a
 langDateFormatValuesLoaded = [x[lang] for x in langDateFormatValues]
 
 dateFormatCodes = ["a", "A", "w", "d", "b", "B", "m", "y", "Y", "H", "I", "p", "M", "S", "f", "z", "Z", "j", "U", "W", "c", "x", "X", "%", "G", "u", "V"]
-prefixdateFormatCodes = "%"
+prefixDateFormatCodes = "%"
 
 
 # turns format string into formatted date/time
@@ -20,7 +20,7 @@ def getDate(format):
     curDateTimeForm = curDateTime.strftime(format)
     return curDateTimeForm
 
-# ((needs input bugfixing: very easy to write wrong input!))
+# ((needs input bugfixes: very easy to write wrong input!))
     # tooltip as guide which expressions to use
     # and also try except and formatting help while entering -->> !! still improvable !!
 def checkDateFormat():
