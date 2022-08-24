@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<settings>
+
+    <user id="0">
+
+        <lang>
+            0
+            <!-- en (0)
+            oder: de (1) -->
+        </lang>
+
+        <time>
+            <!-- ??? -->
+        </time>
+
+        <dial>
+            0
+            <!-- gui (0)
+            written (1) -->
+        </dial>
+
+    </user>
+
+</settings>
