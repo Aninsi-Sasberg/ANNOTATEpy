@@ -1,3 +1,5 @@
+# Table of Contents
+
 <style>
   
   *{
@@ -5,8 +7,6 @@
   }
 
 </style>
-
-# Table of Contents
 
 - [Table of Contents](#table-of-contents)
 - [PLAN](#plan)
@@ -17,7 +17,8 @@
   - [**Systems**](#systems)
     - [*NOTEBOOK* system](#notebook-system)
     - [*LIST* system](#list-system)
-  - [**Settings**](#settings)
+  - [**Globals**](#globals)
+    - [Settings (read while loading)](#settings-read-while-loading)
   - [**Functions**](#functions)
     - [DATE](#date)
   - [**Modularisation**](#modularisation)
@@ -59,6 +60,12 @@ single window with toggleable side panel(s)
 commandline implementation with same features
 
 - new
+  - input file..
+    - name
+    - type
+    - path
+      - can either type in relative path, whole path, or choose via explorer (&rarr; choosing path + filename + extension (via dropdown))
+      - also possible whole/relative path + filename with extension via typing
 - choose (like ANNOTATEps with 4 letter definition)
 - write
 
@@ -91,18 +98,25 @@ commandline implementation with same features
 
 ---
 
-## **Settings**
+## **Globals**
+
+- mode = gui(0) or terminal mode (1)
+
+### Settings (read while loading)
 
 - timezone & date
 - language
   - *var (int):* **lang**
   - english (0), german (1)
+- dialog = which file creation dialog
 
 ---
 
 ## **Functions**
 
 ### DATE
+
+- user can add Date via a keyboard shortcut or button in windowmenu (Strg+.)
 
 <mark>
 ADD STUFF.
@@ -127,18 +141,19 @@ ADD STUFF.
 
 ### XML
 
-- [settings](../filesystem/settings.xml "open the file 'settings.xml'")
+- [settings](../../bin/annotate/filesystem/settings.xml "open the file 'settings.xml'")
   - language = lang
   - timezone = time
-- [data](../filesystem/data.xml "open the file 'data.xml'")
-  - recent files = "recent"
-- [notebooks](../filesystem/notebooks.xml "open the file 'notebooks.xml'")
+  - dialogue = dial
+- [data](../../bin/annotate/filesystem/data.xml "open the file 'data.xml'")
+  - recent files = recent
+- [notebooks](../../bin/annotate/filesystem/notebooks.xml "open the file 'notebooks.xml'")
   - notebook
     - path
     - title
     - style &rarr; css
     - length in 'pages' = len
-- [lists](../filesystem/lists.xml "open the file 'lists.xml'")
+- [lists](../../bin/annotate/filesystem/lists.xml "open the file 'lists.xml'")
   - list
     - entries = ent
 
@@ -150,3 +165,6 @@ ADD STUFF.
   - [python datetime module](https://docs.python.org/3/library/datetime.html "link to the datetime reference")
 - list comprehensions
   +
+
+"Ist white space so the schwarze Materie of the notizprogramme" -Emma Dübner
+"bc in life u cant erase things and cant go back it just goes on and on" -Emma Dübner
