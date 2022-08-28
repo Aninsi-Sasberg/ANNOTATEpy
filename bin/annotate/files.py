@@ -26,6 +26,7 @@ class File:
         self.file = self.openFile()
         # # TODO always get Error: not readable
         self.fileContentsLines = self.file.readlines()
+        self.fileContentsString = self.file.read()
         self.getContentInfo()
         self.openedFileList.append(self)
 
@@ -101,15 +102,9 @@ class File:
         self.charactersNoWhite = self.characters - self.realWhite
         # print(self.words, self.pseudoWhite, self.wordsPseudoWhite, self.realWhite, self.wordsWhite, self.tooManyWhite, self.characters, self.charactersNoWhite, self.lines)
 
-    # TODO killWhite
-    def killWhite(self):
-        for sentence in self.fileContentsLines:
-            for word in sentence.split():
-                self.tempFileContentsLinesKillWhite.append(word)
-        self.fileContentsLines = self.tempFileContentsLinesGetWords
-        self.file.truncate()
-
     # TODO Undo/Redo
+
+    # TODO proper file closing
 
 # # filename, path, mode, filetype 
 # def userCreateFile():
