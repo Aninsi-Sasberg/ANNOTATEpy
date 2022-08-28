@@ -9,11 +9,12 @@
 </style>
 
 - [Table of Contents](#table-of-contents)
+- [ToDo](#todo)
 - [PLAN](#plan)
   - [**ORDER**](#order)
   - [**Modes**](#modes)
     - [GUI](#gui)
-    - [TERMINAL](#terminal)
+    - [~~TERMINAL~~](#terminal)
   - [**Systems**](#systems)
     - [*NOTEBOOK* system](#notebook-system)
     - [*LIST* system](#list-system)
@@ -25,6 +26,23 @@
     - [Python](#python)
     - [XML](#xml)
   - [**References**](#references)
+  - [Quotes](#quotes)
+
+# ToDo
+
+- XML
+  - Notebook
+  - loading settings etc.
+- gui checking if text in QTextEdit has changed, and then implement CurrentTextContent, and thus communication between gui and files
+- loading loaded file into QTextEdit (problem with self.file.read())
+- think about binding a window to a file\
+  &rarr; means that I can't just -\
+  no. doesn't work, thought about it.
+  if i open the program that would then mean i have to choose a file that's already saved somewhere.
+  so i need so have a way to tell the gui you're operating in this path... oh wow that was easy, just needed the path. the rest is handled by currentTextContent. eZ.
+- style of gui, fonts loading im terminal ist noch unschön
+- make nice exceptions
+- refactor variables
 
 # PLAN
 
@@ -50,12 +68,33 @@ OVERTHINK THIS :))))))
 
 single window with toggleable side panel(s)
 
-- side panel(s)
+- ~~side panel(s)~~
   - choose notebook
+- Top Ribbon Menu / Menubar
+  - File
+    - New File
+    - New Window
+    - ---
+    - Open File
+    - Open Recent
+      - 10 Files: #Number fullname (= filepath + filename + extension)
+  - Edit
+    - KillWhitespace
+    - Insert Current Date
+  - Help
+    - Opens this Repository on Github
+- Keyboard Shortcuts
+  - Navigate Ribbon Menu: `alt`
+  - New File
+  - Open File
+  - New Window
+  - Kill Whitespace
+  - Insert Current Date
 
-  -
 
-### TERMINAL
+### ~~TERMINAL~~
+
+<mark>on hold</mark>
 
 commandline implementation with same features
 
@@ -67,7 +106,7 @@ commandline implementation with same features
       - can either type in relative path, whole path, or choose via explorer (&rarr; choosing path + filename + extension (via dropdown))
       - also possible whole/relative path + filename with extension via typing
 - choose (like ANNOTATEps with 4 letter definition)
-- write
+- write~~
 
 ---
 
@@ -134,8 +173,11 @@ ADD STUFF.
   - loads all Notebooks, and opens them as rw
 - [date](../../bin/annotate/date.py "open the file 'date.py'")
   - handles all [date formatting](#date "read about date formatting")
-- gui
+- [gui](../../bin/annotate/gui.py)
   - handles all the [gui](#gui "read about the GUI")
+  - needs to communicate with files
+- files
+  - handles all file loading and saving
 - terminal
   - handles [terminal execution](#terminal "read about the terminal execution")
 
@@ -153,6 +195,7 @@ ADD STUFF.
     - title
     - style &rarr; css
     - length in 'pages' = len
+    - formatting rules (date at beginning?)
 - [lists](../../bin/annotate/filesystem/lists.xml "open the file 'lists.xml'")
   - list
     - entries = ent
@@ -166,5 +209,7 @@ ADD STUFF.
 - list comprehensions
   +
 
-"Ist white space so the schwarze Materie of the notizprogramme" -Emma Dübner
-"bc in life u cant erase things and cant go back it just goes on and on" -Emma Dübner
+## Quotes
+
+- "Ist white space so the schwarze Materie of the notizprogramme" -Emma Dübner
+- "bc in life u cant erase things and cant go back it just goes on and on" -Emma Dübner
