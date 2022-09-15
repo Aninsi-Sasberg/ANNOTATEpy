@@ -42,6 +42,7 @@
   so i need so have a way to tell the gui you're operating in this path... oh wow that was easy, just needed the path. the rest is handled by currentTextContent. eZ.
 - style of gui, fonts loading im terminal ist noch unschön
 - make nice exceptions
+- clean up print statements
 - refactor variables
 
 # PLAN
@@ -72,24 +73,26 @@ single window with toggleable side panel(s)
   - choose notebook
 - Top Ribbon Menu / Menubar
   - File
+    - Save
+    - Save As
+    - ---
     - New File
-    - New Window
     - ---
     - Open File
     - Open Recent
       - 10 Files: #Number fullname (= filepath + filename + extension)
   - Edit
+    - Undo
+    - Redo
+    - ---
     - KillWhitespace
     - Insert Current Date
+  - View
+    - New Window
   - Help
     - Opens this Repository on Github
 - Keyboard Shortcuts
-  - Navigate Ribbon Menu: `alt`
-  - New File
-  - Open File
-  - New Window
-  - Kill Whitespace
-  - Insert Current Date
+  - EVERYTHING
 
 
 ### ~~TERMINAL~~
@@ -106,7 +109,7 @@ commandline implementation with same features
       - can either type in relative path, whole path, or choose via explorer (&rarr; choosing path + filename + extension (via dropdown))
       - also possible whole/relative path + filename with extension via typing
 - choose (like ANNOTATEps with 4 letter definition)
-- write~~
+- write
 
 ---
 
