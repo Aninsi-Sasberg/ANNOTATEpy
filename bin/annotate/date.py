@@ -16,7 +16,7 @@ prefixDateFormatCodes = "%"
 
 # turns format string into formatted date/time
 def getDate(format):
-    curDateTime= datetime.datetime.now()
+    curDateTime = datetime.datetime.now()
     curDateTimeForm = curDateTime.strftime(format)
     return curDateTimeForm
 
@@ -44,6 +44,6 @@ def checkDateFormat():
 '''needs to be tested'''
 
 
-dateFormatPass = checkDateFormat()
+# dateFormatPass = checkDateFormat()
 
-print(getDate(dateFormatPass))
+# print(getDate(dateFormatPass))
