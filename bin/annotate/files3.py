@@ -12,34 +12,20 @@
 # each time file gets loaded, saved, created
 # new file opening call
 
-
 import os
-
-# class File:
-
-#     openedFileList = []
-
-#     def __init__(self, filename, path, filetype):
-#         self.filename = filename
-#         self.path = path
-#         self.filetype = filetype
-#         self.fullFilename = self.filename + self.filetype
-#         self.fullName = os.path.join(self.path, self.filename + self.filetype)
-#         self.checkPath()
-#         self.openFile()
-#         # # TODO always get Error: not readable
-#         self.getContentInfo()
-#         self.openedFileList.append(self)
-#         # self.saveToFile()
-
 
 def checkFile(fullName):
     if os.path.exists(fullName) == True:
         print("file exists")
         openMode = "r+"
+    elif os.path.exists(os.path.dirname(fullName)):
+        with open(fullName, "x", encoding="utf-8") as file:
+            pass
+        print("file will be created")
+        openMode = "r+"
     else:
         s = os.makedirs(fullName)
-        print("file %s will be created"%s)
+        print("file ${s} will be created")
         openMode = "w+"
     return openMode
 
@@ -59,19 +45,6 @@ def saveToFile(fullName, currentTextContent):
     checkFile(fullName)
     with open(fullName, "w", encoding="utf-8") as file:
         file.write(currentTextContent)
-
-# # check if path exists and if not create it
-# def checkPath(path):
-#     try:
-#         if os.path.exists(path) == True:
-#             print("path exists")
-#         else:
-#             s = os.makedirs(path)
-#             print("path %s has been created"%s)
-#     except:
-#         print("Could not create path.")
-    
-#     '''make except clearer'''
 
 def getFilename(fullName):
     path, filename = os.path.split(fullName)
