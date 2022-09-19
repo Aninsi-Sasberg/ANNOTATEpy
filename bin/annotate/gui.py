@@ -139,7 +139,7 @@ class MainWindow(QMainWindow):
         self.menuHelpOpenHelp = QAction("Open Help File", self)
         self.menuHelpOpenHelp.setShortcut("F1")
         self.menuHelpOpenHelp.setStatusTip("Open the Github Repository of ANNOTATEpy")
-        self.menuHelpOpenHelp.triggered.connect(self.openGithub)
+        self.menuHelpOpenHelp.triggered.connect(self.openHelpFile)
         self.menuHelp.addAction(self.menuHelpOpenHelp)
 
         self.menuHelpOpenGithub = QAction("Open Github", self)
