@@ -32,6 +32,7 @@ class MainWindow(QMainWindow):
         self.currentTextContent = ""
         self.fileContentString = ""
         self.fileChanged = False
+        self.zoomCounter = 0
 
         self.initUI()
 
@@ -173,6 +174,8 @@ class MainWindow(QMainWindow):
         self.mainText.setGeometry(0, 0, 400,400)
         # self.mainText.siz
         self.mainText.setUndoRedoEnabled(True)
+        self.newFont = QFont("Arial")
+        self.mainText.setFont(self.newFont)
         # self.mainText.insertPlainText(self.currentTextContent)
         # self.mainText.textChanged().self.saveToCurrentTextContent()
 
@@ -305,10 +308,36 @@ class MainWindow(QMainWindow):
     def redo(self):
         self.mainText.redo()
 
+    @pyqtSlot()
+    def zoomingIn(self):
+        self.mainText.zoomIn(+1)
+        self.zoomCounter += 1
+
+    @pyqtSlot()
+    def zoomingOut(self):
+        self.mainText.zoomOut(+1)
+        self.zoomCounter -= 1
+
+    @pyqtSlot()
+    def zoomingBack(self):
+        self.mainText.zoomOut(self.zoomCounter)
+        self.zoomCounter = 0
+
+    # https://codingshiksha.com/python/python-3-pyqt5-file-dialogfont-pickercolor-picker-using-qfontdialog-qcolordialog-widgets-gui-desktop-app-full-project-for-beginners/
+    def fontChooser(self):
+        self.newFont, self.fontFine = QFontDialog.getFont(self.newFont, self)
+        if self.fontFine:
+            self.mainText.setFont(self.newFont)
+
     # TODO Implement Date Format loading
     @pyqtSlot()
     def insertDate(self):
         self.mainText.insertPlainText(date.getDate("%Y"))
+
+    @pyqtSlot()
+    def openHelpFile(self):
+        self.fileContentString = files3.openFile(".\\res\\docs\\help.txt")
+        self.mainText.setText(self.fileContentString)
 
     @pyqtSlot()
     def openGithub(self):
