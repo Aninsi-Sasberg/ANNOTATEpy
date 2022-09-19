@@ -243,6 +243,14 @@ class MainWindow(QMainWindow):
         self.saveToOpenedFile()
         self.setWindowTitle("ANNOTATEpy  " + self.fullName)
 
+    @pyqtSlot()
+    def saveAsFileDialog(self):
+        self.newFullName, filters = QFileDialog.getSaveFileName(self, "Save As File",os.path.basename(self.fullName),"All Filetypes(*);;Text Files (*.txt);;Markdown Files (*.md)")
+        if self.newFullName:
+            self.saveToOpenedFile()
+            self.setWindowTitle("ANNOTATEpy  " + self.fullName)
+            self.fullName = self.newFullName
+
     # TODO find out what @pyqtSlot() does; reference: # https://stackoverflow.com/a/25994381
     @pyqtSlot()
     def saveToOpenedFile(self):
