@@ -24,6 +24,9 @@ class MainWindow(QMainWindow):
         super(MainWindow, self).__init__()
         self.setGeometry(200, 200, 400, 400)
         self.setWindowTitle("ANNOTATEpy")
+        self.icon = QIcon()
+        self.icon.addFile(".\\res\\icon\\ANNOTATEpy.png")
+        self.setWindowIcon(self.icon)
 
         self.fullName = ""
         self.currentTextContent = ""
