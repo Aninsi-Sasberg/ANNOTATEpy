@@ -37,12 +37,12 @@ class MainWindow(QMainWindow):
 
     # https://doc.qt.io/qtforpython-5/overviews/qtwidgets-mainwindows-menus-example.html#menus-example
     def createMenubarActions(self):
-        # self.menuFile.addAction("New File")
-        self.menuFileNewFile = QAction("New File", self)
-        self.menuFileNewFile.setShortcut("Ctrl+N")
-        self.menuFileNewFile.setStatusTip("Create a new File")
-        # menuFile.triggered.connect(self.close_application)
-        self.menuFile.addAction(self.menuFileNewFile)
+        # # self.menuFile.addAction("New File")
+        # self.menuFileNewFile = QAction("New File", self)
+        # self.menuFileNewFile.setShortcut("Ctrl+N")
+        # self.menuFileNewFile.setStatusTip("Create a new File")
+        # # menuFile.triggered.connect(self.close_application)
+        # self.menuFile.addAction(self.menuFileNewFile)
 
         self.menuFileOpenFile = QAction("Open File", self)
         self.menuFileOpenFile.setShortcut("Ctrl+O")
@@ -55,6 +55,12 @@ class MainWindow(QMainWindow):
         self.menuFileSaveFile.setStatusTip("Save a File")
         self.menuFileSaveFile.triggered.connect(self.saveToFile)
         self.menuFile.addAction(self.menuFileSaveFile)
+
+        self.menuFileSaveAsFile = QAction("Save As File", self)
+        self.menuFileSaveAsFile.setShortcut("Ctrl+Shift+S")
+        self.menuFileSaveAsFile.setStatusTip("Save as a new File")
+        self.menuFileSaveAsFile.triggered.connect(self.saveAsFileDialog)
+        self.menuFile.addAction(self.menuFileSaveAsFile)
 
         self.menuFileRefreshFile = QAction("Refresh File", self)
         self.menuFileRefreshFile.setShortcut("Ctrl+R")
@@ -99,20 +105,41 @@ class MainWindow(QMainWindow):
         self.menuViewNewWindow.setStatusTip("Open a new Window")
         # self.menuFile.triggered.connect(self.close_application)
         self.menuView.addAction(self.menuViewNewWindow)
+
+        self.menuViewFontChooser = QAction("Choose Font", self)
+        self.menuViewFontChooser.setShortcut("Ctrl+F")
+        self.menuViewFontChooser.setStatusTip("Choose a Font to Display your Text in")
+        self.menuViewFontChooser.triggered.connect(self.fontChooser)
+        self.menuView.addAction(self.menuViewFontChooser)
+
+        self.menuView.addSeparator()
         
         self.menuViewZoomIn = QAction("Zoom In", self)
-        self.menuViewZoomIn.setShortcut("Strg++")
+        self.menuViewZoomIn.setShortcut("Ctrl++")
         self.menuViewZoomIn.setStatusTip("Zoom In to make Text larger")
-        # self.menuFile.triggered.connect(self.close_application)
+        self.menuViewZoomIn.triggered.connect(self.zoomingIn)
         self.menuView.addAction(self.menuViewZoomIn)
 
         self.menuViewZoomOut = QAction("Zoom Out", self)
-        self.menuViewZoomOut.setShortcut("Strg+-")
+        self.menuViewZoomOut.setShortcut("Ctrl+-")
         self.menuViewZoomOut.setStatusTip("Zoom Out to make Text smaller")
-        # self.menuFile.triggered.connect(self.close_application)
+        self.menuViewZoomOut.triggered.connect(self.zoomingOut)
         self.menuView.addAction(self.menuViewZoomOut)
 
+        self.menuViewZoomBack = QAction("Zoom Back", self)
+        self.menuViewZoomBack.setShortcut("Ctrl+0")
+        self.menuViewZoomBack.setStatusTip("Zoom Back to make Text original Scale")
+        self.menuViewZoomBack.triggered.connect(self.zoomingBack)
+        self.menuView.addAction(self.menuViewZoomBack)
 
+
+
+
+        self.menuHelpOpenHelp = QAction("Open Help File", self)
+        self.menuHelpOpenHelp.setShortcut("F1")
+        self.menuHelpOpenHelp.setStatusTip("Open the Github Repository of ANNOTATEpy")
+        self.menuHelpOpenHelp.triggered.connect(self.openGithub)
+        self.menuHelp.addAction(self.menuHelpOpenHelp)
 
         self.menuHelpOpenGithub = QAction("Open Github", self)
         self.menuHelpOpenGithub.setShortcut("Ctrl+Alt+P")
@@ -127,10 +154,10 @@ class MainWindow(QMainWindow):
 
         self.menubar = self.menuBar()
 
-        self.menuFile = self.menubar.addMenu("File")
-        self.menuEdit = self.menubar.addMenu("Edit")
-        self.menuView = self.menubar.addMenu("View")
-        self.menuHelp = self.menubar.addMenu("Help")
+        self.menuFile = self.menubar.addMenu("&File")
+        self.menuEdit = self.menubar.addMenu("&Edit")
+        self.menuView = self.menubar.addMenu("&View")
+        self.menuHelp = self.menubar.addMenu("&Help")
         self.createMenubarActions()
 
 
