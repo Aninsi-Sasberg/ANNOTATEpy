@@ -224,9 +224,11 @@ class MainWindow(QMainWindow):
     @pyqtSlot()
     def openFileDialog(self):
         # Get filename and show only .writer files
-        self.fullName, filters = QFileDialog.getOpenFileName(self, "Open File","","All Files(*);;Text Files (*.txt)")
-        self.openFile()
-        self.setWindowTitle("ANNOTATEpy  " + self.fullName)
+        self.newFullName, filters = QFileDialog.getOpenFileName(self, "Open File","","All Files(*);;Text Files (*.txt)")
+        if self.newFullName:
+            self.fullName = self.newFullName
+            self.openFile()
+            self.setWindowTitle("ANNOTATEpy  " + self.fullName)
 
     # TODO else statement and QMessageBox in openFile
     @pyqtSlot()
@@ -234,14 +236,10 @@ class MainWindow(QMainWindow):
         if self.fullName:
             self.fileContentString = files3.openFile(self.fullName)
             self.mainText.setText(self.fileContentString)
-        # else:
-        #     # https://stackoverflow.com/questions/34253350/pyqt-messagebox-yes-or-no-with-an-if
-        #     print("hi")
 
     @pyqtSlot()
     def saveFileDialog(self):
-        # Get filename and show only .writer files
-        self.fullName, filters = QFileDialog.getSaveFileName(self, "Save File","","All Files(*);;Text Files (*.txt)")
+        self.fullName, filters = QFileDialog.getSaveFileName(self, "Save File","","All Filetypes(*);;Text Files (*.txt);;Markdown Files (*.md)")
         self.saveToOpenedFile()
         self.setWindowTitle("ANNOTATEpy  " + self.fullName)
 
