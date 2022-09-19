@@ -7,36 +7,15 @@ from PyQt6 import QtWidgets
 # from PyQt6.QtWidgets import QApplication, QMainWindow
 from PyQt6.QtWidgets import *
 from PyQt6.QtCore import pyqtSlot
-from PyQt6.QtGui import QKeySequence
-from PyQt6.QtGui import QShortcut
+# from PyQt6.QtGui import QKeySequence
+# from PyQt6.QtGui import QShortcut
 from PyQt6.QtGui import QAction
+from PyQt6.QtGui import QIcon
+from PyQt6.QtGui import QFont
 
 import sys
 import re
 from webbrowser import open as webOpen
-
-# def saveFileDialog():
-#     try:
-#         # TODO: need condition to break if user presses close button on dialog, or else user is stuck in loop even if he doesn't want to save a file anymore
-#         path = filedialog.asksaveasfilename(confirmoverwrite=True, defaultextension=".txt")
-#         if not path:
-#             raise Exception
-#         print("You've selected the directory + filename:\n" + path)
-#     except:
-#         print("You have to choose a directory.")
-#     return path
-
-# def guiCreateFile():
-#     # select directory
-#     path = saveFileDialog()
-
-#     path, filename = os.path.split(path)
-#     filename, filetype = os.path.splitext(filename)
-#     files3.File(filename, path, filetype)
-
-#     # TODO, is this necessary?
-#     guiFileCreated = 1
-#     return guiFileCreated
 
 class MainWindow(QMainWindow):
     # def __init__(self, parent = None):
