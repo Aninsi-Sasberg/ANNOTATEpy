@@ -189,7 +189,6 @@ ADD STUFF.
 - [settings](../../bin/annotate/filesystem/settings.xml "open the file 'settings.xml'")
   - language = lang
   - timezone = time
-  - dialogue = dial
 - [data](../../bin/annotate/filesystem/data.xml "open the file 'data.xml'")
   - recent files = recent
 - [notebooks](../../bin/annotate/filesystem/notebooks.xml "open the file 'notebooks.xml'")
