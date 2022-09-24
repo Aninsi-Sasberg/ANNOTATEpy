@@ -1,24 +1,45 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
 <settings>
 
-    <user id="0">
+    <user id="0" name="Aninsi Sasberg">
 
-        <lang>
-            0
-            <!-- en (0)
-            oder: de (1) -->
-        </lang>
+        <preset name="Default">
 
-        <time>
-            <!-- ??? -->
-        </time>
+            <lang>0</lang>
 
-        <dial>
-            0
-            <!-- gui (0)
-            written (1) -->
-        </dial>
+            <time>
+
+                <tformat name="Tag, Monat, Jahr" format="%d.%M.%Y" />
+
+            </time>
+
+            <font fontFamily="Pixel Operator" fontSize="12" />
+
+        </preset>
+
+        <preset name="Recent">
+
+
+            <lang>0</lang>
+
+            <time>
+
+                <tformat name="" format="" />
+
+            </time>
+
+        </preset>
+
+        <preset name="User">
+
+            <lang>0</lang>
+
+            <time>
+
+                <tformat name="" format="" />
+
+            </time>
+
+        </preset>
 
     </user>
 
