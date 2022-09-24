@@ -14,6 +14,7 @@
 
 1. General Usage:
 ANNOTATEpy is a lightweight Text-Editor intended to mainly be used for editing and writing Plain-Text.
+But who is Tate and why is it his year?
 
     1.1. File Actions:
 
@@ -28,8 +29,8 @@ ANNOTATEpy is a lightweight Text-Editor intended to mainly be used for editing a
         After this you will be prompted to enter your desired File Location.
 
         1.1.3. Saving same contents to a new File:
-        // Menubar -->> File -->> Save As File
-        To Save your current Text Edits to a new/different File you can navigate to the Menubar and choose the category 'File' and then click on 'Save As File', or alternatively press 'Ctrl + Shift + S'.
+        // Menubar -->> File -->> Save As...
+        To Save your current Text Edits to a new/different File you can navigate to the Menubar and choose the category 'File' and then click on 'Save As...', or alternatively press 'Ctrl + Shift + S'.
         After this you will be prompted to enter your desired File Location.
 
         1.1.4. Reloading a File:
