@@ -1,25 +1,16 @@
 import files3
 import date
-
 import os
-
-from PyQt6 import QtWidgets
-# from PyQt6.QtWidgets import QApplication, QMainWindow
-from PyQt6.QtWidgets import *
-from PyQt6.QtCore import pyqtSlot
-# from PyQt6.QtGui import QKeySequence
-# from PyQt6.QtGui import QShortcut
-from PyQt6.QtGui import QAction
-from PyQt6.QtGui import QIcon
-from PyQt6.QtGui import QFont
-
 import sys
 import re
 from webbrowser import open as webOpen
 
+from PyQt6.QtWidgets import QMainWindow, QApplication, QTextEdit, QWidget, QVBoxLayout, QFileDialog, QFontDialog
+from PyQt6.QtCore import pyqtSlot
+from PyQt6.QtGui import QAction, QIcon, QFont
+
+
 class MainWindow(QMainWindow):
-    # def __init__(self, parent = None):
-    #     super(MainWindow, self).__init__(parent)
     def __init__(self):
         super(MainWindow, self).__init__()
         self.setGeometry(200, 200, 400, 400)
@@ -38,13 +29,6 @@ class MainWindow(QMainWindow):
 
     # https://doc.qt.io/qtforpython-5/overviews/qtwidgets-mainwindows-menus-example.html#menus-example
     def createMenubarActions(self):
-        # # self.menuFile.addAction("New File")
-        # self.menuFileNewFile = QAction("New File", self)
-        # self.menuFileNewFile.setShortcut("Ctrl+N")
-        # self.menuFileNewFile.setStatusTip("Create a new File")
-        # # menuFile.triggered.connect(self.close_application)
-        # self.menuFile.addAction(self.menuFileNewFile)
-
         self.menuFileOpenFile = QAction("Open File", self)
         self.menuFileOpenFile.setShortcut("Ctrl+O")
         self.menuFileOpenFile.setStatusTip("Open a File")
@@ -101,12 +85,6 @@ class MainWindow(QMainWindow):
 
 
 
-        self.menuViewNewWindow = QAction("New Window", self)
-        self.menuViewNewWindow.setShortcut("Ctrl+Shift+N")
-        self.menuViewNewWindow.setStatusTip("Open a new Window")
-        # self.menuFile.triggered.connect(self.close_application)
-        self.menuView.addAction(self.menuViewNewWindow)
-
         self.menuViewFontChooser = QAction("Choose Font", self)
         self.menuViewFontChooser.setShortcut("Ctrl+F")
         self.menuViewFontChooser.setStatusTip("Choose a Font to Display your Text in")
@@ -132,7 +110,6 @@ class MainWindow(QMainWindow):
         self.menuViewZoomBack.setStatusTip("Zoom Back to make Text original Scale")
         self.menuViewZoomBack.triggered.connect(self.zoomingBack)
         self.menuView.addAction(self.menuViewZoomBack)
-
 
 
 
@@ -168,33 +145,9 @@ class MainWindow(QMainWindow):
 
         self.mainText = QTextEdit(self)
         self.setCentralWidget(self.mainText)
-        # self.mainText
-        # self.mainText.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
-        # self.mainText.resize(400,400)
-        self.mainText.setGeometry(0, 0, 400,400)
-        # self.mainText.siz
         self.mainText.setUndoRedoEnabled(True)
         self.newFont = QFont("Arial")
         self.mainText.setFont(self.newFont)
-        # self.mainText.insertPlainText(self.currentTextContent)
-        # self.mainText.textChanged().self.saveToCurrentTextContent()
-
-
-        # TODO add buttons to SaveAsDialog
-        # self.saveAsButton = QAbstractButton
-        # QAbstractButton.setText(self.saveAsButton, "Save As")
-
-        # self.saveAsOpenDifferent = QMessageBox
-        # self.saveAsOpenDifferent.addButton(button=self.saveAsButton, role=QMessageBox.AcceptRole)
-
-        # # frameWidget = QWidget()
-        # # frameLayout = QVBoxLayout()
-
-        # # frameLayout.addWidget(self.displayWidget)
-        # # frameLayout.addWidget(buttonWidget)
-
-        # # frameWidget.setLayout(frameLayout)
-        # # self.setCentralWidget(frameWidget)
 
         self.widget = QWidget()
         self.layout = QVBoxLayout()
@@ -205,20 +158,8 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(self.widget)
         self.initMenubar()
 
-        # # https://stackoverflow.com/a/25994381
-        # self.shortcut = QShortcut(QKeySequence("Ctrl+S"), self)
-        # self.shortcut.activated.connect(self.saveToOpenedFile)
-
         self.updateCurrentTextContentSignal = self.mainText.textChanged
         self.updateCurrentTextContentSignal.connect(self.updateCurrentTextContent)
-
-    # TODO Change Line Wrap Mode
-
-    # https://www.binpress.com/building-text-editor-pyqt-1/
-    # def newWindow(self):
-        # spawnNewWindow = MainWindow(self) -> well the behavior...
-        # spawnNewWindow = MainWindow() -> without parent doesn't work, must have parent, but behavior isn't favorable in that way, because if main Window is closed everything gets shut down
-        # spawnNewWindow.show()
 
     # https://www.binpress.com/building-text-editor-pyqt-1/
     @pyqtSlot()
@@ -230,7 +171,6 @@ class MainWindow(QMainWindow):
             self.openFile()
             self.setWindowTitle("ANNOTATEpy  " + self.fullName)
 
-    # TODO else statement and QMessageBox in openFile
     @pyqtSlot()
     def openFile(self):
         if self.fullName:
@@ -251,7 +191,7 @@ class MainWindow(QMainWindow):
             self.setWindowTitle("ANNOTATEpy  " + self.fullName)
             self.fullName = self.newFullName
 
-    # TODO find out what @pyqtSlot() does; reference: # https://stackoverflow.com/a/25994381
+    # https://stackoverflow.com/a/25994381
     @pyqtSlot()
     def saveToOpenedFile(self):
         if self.fullName:
@@ -270,7 +210,6 @@ class MainWindow(QMainWindow):
         else:
             self.saveFileDialog()
 
-    #TODO FileChanged, makes Pop-Up before quitting app
     def updateCurrentTextContent(self):
         self.currentTextContent = self.mainText.toPlainText()
 
@@ -292,18 +231,14 @@ class MainWindow(QMainWindow):
         output = "\n".join(input)
         return output
 
-    # DONE killWhite
     @pyqtSlot()
     def killWhite(self):
-        # TODO implement auto updating when new Text is entered, because this line (under here) shouldn't be necessary if auto updating currentTextContent is implemented
-        # self.setCurrentTextContent()
         self.tempCurrentTextContentLines = []
         self.currentTextContentLines = self.splitToLines(self.currentTextContent)
         for line in self.currentTextContentLines:
-            self.tempCurrentTextContentLines.append(re.sub(" +", " ",line).strip())
             # https://statisticsglobe.com/python-remove-whitespace-in-string
+            self.tempCurrentTextContentLines.append(re.sub(" +", " ",line).strip())
         self.currentTextContent = self.stitchToLine(self.tempCurrentTextContentLines)
-        # TODO make it so that killWhite doesn't erase Undo Memory
         self.mainText.setText(self.currentTextContent)
 
     @pyqtSlot()
@@ -335,7 +270,6 @@ class MainWindow(QMainWindow):
         if self.fontFine:
             self.mainText.setFont(self.newFont)
 
-    # TODO Implement Date Format loading
     @pyqtSlot()
     def insertDate(self):
         self.mainText.insertPlainText(date.getDate("%Y"))
