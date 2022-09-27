@@ -1,0 +1,13 @@
+.QTextEdit {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+/* TODO find out how to change global font, so user has more customisation options */
+* {
+
+
+    margin: 0;
+    padding: 0;
+}

@@ -23,12 +23,35 @@ def checkFilesExistCreateLoad(pathlist):
 
             # except:
 
+checkFilesExistCreateLoad(pathlist)
 
+
+# SETTINGS:
+# settings -> root
+# [n]user(id, name) -> user settings
+# [n][n]preset(name) -> presets of settings
+# [n][n][0]lang -> setting the language
+# [n][n][1]time -> time format container
+# [n][n][1][n]tformat(name, format) -> setting the time format
+# [n][n][2]font(fontFamily, fontSize) -> font family + size
 
 
 settings = etet.parse(".\\bin\\annotate\\filesystem\\settings.xml")
 sroot = settings.getroot()
-print(etet.tostring(sroot))
+# print(sroot[0].tag)
+
+for user in sroot:
+    print("{} = {}".format(user.tag, user.attrib["name"]))
+    for preset in user:
+        print("{} = {}".format(preset.tag, preset.attrib["name"]))
+        for presetsettings in preset:
+            if presetsettings.tag == "time":
+                for tformat in presetsettings:
+                    print(tformat.attrib)
+            # elif presetsettings.tag == "font":
+            else:
+                print("{}, {}".format(presetsettings.tag, presetsettings.text))
+
 
 settings.write(".\\bin\\annotate\\filesystem\\settings.xml")
 
@@ -41,6 +64,3 @@ notebooksPath = "uiiui"
 
 # TODO think about linking recent files with Notebook/List loading
 # TODO implement different settings for different users
-
-
-# print(a)
