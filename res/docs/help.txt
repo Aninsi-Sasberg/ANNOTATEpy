@@ -8,41 +8,136 @@
         1.2. Editing
             1.2.1. Undo/Redo
             1.2.2. Deleting Whitespace
+            1.2.3. Inserting a formatted Date
+        1.3. View
+            1.3.1. Choosing a Font
+            1.3.2. Zooming In/Out/Back
+        1.4. Help
+            1.4.1. Open this Help File
+            1.4.1. Open Github Repository
     2. Shortcuts
-    3. Known Bugs
+        2.1. File
+        2.2. Edit
+        2.3. View
+        2.4. Help
+    3. Known Problems
+        3.1. Unsupported
+        3.2. Bugs
     4. Roadmap
+    5. Version Info
 
 1. General Usage:
 ANNOTATEpy is a lightweight Text-Editor intended to mainly be used for editing and writing Plain-Text.
-But who is Tate and why is it his year?
+But who is Tate Py and why is it his year?
 
     1.1. File Actions:
 
         1.1.1. Opening a File:
-        // Menubar -->> File -->> Open File
+        // Menubar -->> File -->> Open File (Ctrl + O)
         To Open a File you can navigate to the Menubar and choose the category 'File' and then click on 'Open File', or alternatively press 'Ctrl + O'.
         After this you will be prompted to choose a File to open.
 
         1.1.2. Saving a File:
-        // Menubar -->> File -->> Save File
+        // Menubar -->> File -->> Save File (Ctrl + S)
         To Save a File you can navigate to the Menubar and choose the category 'File' and then click on 'Save File', or alternatively press 'Ctrl + S'.
         After this you will be prompted to enter your desired File Location.
 
         1.1.3. Saving same contents to a new File:
-        // Menubar -->> File -->> Save As...
+        // Menubar -->> File -->> Save As... (Ctrl + Shift + S)
         To Save your current Text Edits to a new/different File you can navigate to the Menubar and choose the category 'File' and then click on 'Save As...', or alternatively press 'Ctrl + Shift + S'.
         After this you will be prompted to enter your desired File Location.
 
         1.1.4. Reloading a File:
-        // Menubar -->> File -->> Refresh File
+        // Menubar -->> File -->> Refresh File (F5)
         To Reload a File because it has been changed by another App you can navigate to the Menubar and choose the category 'File' and then click on 'Refresh File', or alternatively press the 'F5' Key.
 
     1.2. Editing:
 
         1.2.1. Undo/Redo:
-        // Menubar -->> Edit -->> Undo
-        // Menubar -->> Edit -->> Redo
+        // Menubar -->> Edit -->> Undo (Ctrl + Z)
+        // Menubar -->> Edit -->> Redo (Ctrl + Y) or (Ctrl + Shift + Z)
         To Undo the last Text-Edit you can navigate to the Menubar and choose the category 'Edit' and then click on 'Undo', or you can alternatively press 'Ctrl + Z'.
         To Redo the last Text-Edit you can click on Redo instead of Undo in the Menubar, or alternatively press 'Ctrl + Y' or 'Ctrl + Shift + Z'
 
-        1.2.2 Deleting Whitespace
+        1.2.2. Deleting Whitespace:
+        // Menubar -->> Edit -->> Delete Whitespace (Alt + Shift + F)
+        !! Using 'Delete Whitespace' currently results in deleting your Undo/Redo history, so use with caution !!
+        To delete unnecessary Whitespace (Trailing Whitespace, Multiple Whitespaces in succession) in your current Text you can navigate to the Menubar and choose the category 'Edit' and then click on 'Delete Whitespace', or you can alternatively press 'Alt + Shift + F'.
+
+        1.2.3. Inserting a formatted Date:
+        // Menubar -->> Edit -->> Insert Date (Ctrl + .)
+        !! Currently you can only change the Date format via the actual Python Code, the standard format is set to '%d.%m.%Y' (%d = Day numeral, %m = Month numeral, %Y = Year numeral; example: 27.09.2022) !!
+        To Insert a formatted Date at the current Cursor Position you can navigate to the Menubar and choose the category 'Edit' and then click on 'Insert Date', or you can alternatively press 'Ctrl + .'.
+
+    1.3. View:
+
+        1.3.1. Choosing a Font:
+        // Menubar -->> View -->> Choose Font (Ctrl + Shift + F)
+        To change the Font its Size, Weight and Style you can navigate to the Menubar and choose the category 'View' and then click on 'Choose Font', or you can alternatively press 'Ctrl + Shift + F'.
+
+        1.3.2. Zooming In/Out/Back:
+        // Menubar -->> View -->> Zoom In (Ctrl + +)
+        // Menubar -->> View -->> Zoom Out (Ctrl + -)
+        // Menubar -->> View -->> Zoom Back (Ctrl + 0)
+        To Zoom in you can navigate to the Menubar and choose the category 'View' and then click on 'Zoom In', or you can alternatively press 'Ctrl + +'.
+        To Zoom out you can navigate to the Menubar and choose the category 'View' and then click on 'Zoom Out', or you can alternatively press 'Ctrl + -'.
+        To Zoom back to the original Zoom you can navigate to the Menubar and choose the category 'View' and then click on 'Zoom Back', or you can alternatively press 'Ctrl + 0'.
+
+
+    1.4. Help:
+
+        1.4.1. Open this Help File:
+        // Menubar -->> Help -->> Open Help File (F1)
+        To Open this Help File you can navigate to the Menubar and choose the category 'Help' and then click on 'Open Help File', or you can alternatively press 'F1'.
+        But why would you??? You're already here!
+
+        1.4.2. Open Github Repository:
+        // Menubar -->> Help -->> Open on Github (Ctrl + Alt + P)
+        To Open ANNOTATEpy's Github Repository you can navigate to the Menubar and choose the category 'Help' and then click on 'Open on Github', or you can alternatively press 'Ctrl + Alt + P'.
+
+2. Shortcuts:
+    2.1. File:
+        - Open File (Ctrl + O)
+        - Save File (Ctrl + S)
+        - Save As... (Ctrl + Shift + S)
+        - Refresh File (F5)
+
+    2.2. Edit:
+        - Undo (Ctrl + Z)
+        - Redo (Ctrl + Y) or (Ctrl + Shift + Z)
+        - Delete Whitespace (Alt + Shift + F)
+        - Insert Date (Ctrl + .)
+
+    2.3. View:
+        - Choose Font (Ctrl + Shift + F)
+        - Zoom In (Ctrl + +)
+        - Zoom Out (Ctrl + -)
+        - Zoom Back (Ctrl + 0)
+
+    2.4. Help:
+        - Open Help File (F1)
+        - Open on Github (Ctrl + Alt + P)
+
+3. Known Problems:
+
+    3.1. Unsupported:
+
+        - Currently you can only change the Date format via the actual Python Code, the standard format is set to '%d.%m.%Y' (%d = Day numeral, %m = Month numeral, %Y = Year numeral; example: 27.09.2022)
+        - Currently Only Tested on Windows 11
+
+    3.2. Bugs:
+
+        - Using 'Delete Whitespace' currently results in deleting your Undo/Redo history, so use with caution
+
+4. Roadmap:
+
+    - Fix Problems
+    - Refactor Code
+    - Test Support on all Platforms
+
+5. Version:
+
+    ANNOTATEpy is still in development
+    Help File last updated on: 30.09.2022
+
+    Aninsi Sasberg, Karlsruhe 2022
