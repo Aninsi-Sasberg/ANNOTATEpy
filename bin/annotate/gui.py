@@ -1,4 +1,4 @@
-import files3
+import files
 import date
 import os
 import sys
@@ -16,7 +16,7 @@ class MainWindow(QMainWindow):
         self.setGeometry(200, 200, 400, 400)
         self.setWindowTitle("ANNOTATEpy")
         self.icon = QIcon()
-        self.icon.addFile(".\\res\\icon\\ANNOTATEpy.png")
+        self.icon.addFile(os.path.normcase(".\\res\\icon\\ANNOTATEpy.png"))
         self.setWindowIcon(self.icon)
 
         self.fullName = ""
@@ -24,30 +24,32 @@ class MainWindow(QMainWindow):
         self.fileContentString = ""
         self.fileChanged = False
         self.zoomCounter = 0
+        self.dialogExit = False
 
         self.initUI()
 
     # https://doc.qt.io/qtforpython-5/overviews/qtwidgets-mainwindows-menus-example.html#menus-example
     def createMenubarActions(self):
-        self.menuFileOpenFile = QAction("Open File", self)
+        # File
+        self.menuFileOpenFile = QAction("&Open File", self)
         self.menuFileOpenFile.setShortcut("Ctrl+O")
         self.menuFileOpenFile.setStatusTip("Open a File")
         self.menuFileOpenFile.triggered.connect(self.openFileDialog)
         self.menuFile.addAction(self.menuFileOpenFile)
 
-        self.menuFileSaveFile = QAction("Save File", self)
+        self.menuFileSaveFile = QAction("&Save File", self)
         self.menuFileSaveFile.setShortcut("Ctrl+S")
         self.menuFileSaveFile.setStatusTip("Save a File")
         self.menuFileSaveFile.triggered.connect(self.saveToFile)
         self.menuFile.addAction(self.menuFileSaveFile)
 
-        self.menuFileSaveAsFile = QAction("Save As File", self)
+        self.menuFileSaveAsFile = QAction("Save &As File", self)
         self.menuFileSaveAsFile.setShortcut("Ctrl+Shift+S")
         self.menuFileSaveAsFile.setStatusTip("Save as a new File")
         self.menuFileSaveAsFile.triggered.connect(self.saveAsFileDialog)
         self.menuFile.addAction(self.menuFileSaveAsFile)
 
-        self.menuFileRefreshFile = QAction("Refresh File", self)
+        self.menuFileRefreshFile = QAction("&Refresh File", self)
         self.menuFileRefreshFile.setShortcut("Ctrl+R")
         self.menuFileRefreshFile.setShortcut("F5")
         self.menuFileRefreshFile.setStatusTip("Refresh currently opened File")
@@ -55,14 +57,14 @@ class MainWindow(QMainWindow):
         self.menuFile.addAction(self.menuFileRefreshFile)
 
 
-
-        self.menuEditUndo = QAction("Undo", self)
+        # Edit
+        self.menuEditUndo = QAction("&Undo", self)
         self.menuEditUndo.setShortcut("Ctrl+Z")
         self.menuEditUndo.setStatusTip("Undo last Edit")
         self.menuEditUndo.triggered.connect(self.undo)
         self.menuEdit.addAction(self.menuEditUndo)
 
-        self.menuEditRedo = QAction("Redo", self)
+        self.menuEditRedo = QAction("&Redo", self)
         self.menuEditRedo.setShortcut("Ctrl+Y")
         self.menuEditRedo.setShortcut("Ctrl+Shift+Z")
         self.menuEditRedo.setStatusTip("Redo last Edit")
@@ -71,55 +73,55 @@ class MainWindow(QMainWindow):
 
         self.menuEdit.addSeparator()
 
-        self.menuEditKillWhite = QAction("Delete Whitespace", self)
+        self.menuEditKillWhite = QAction("Delete &Whitespace", self)
         self.menuEditKillWhite.setShortcut("Shift+Alt+F")
         self.menuEditKillWhite.setStatusTip("Delete unnecessary Whitespace in whole File")
         self.menuEditKillWhite.triggered.connect(self.killWhite)
         self.menuEdit.addAction(self.menuEditKillWhite)
 
-        self.menuEditInsertDate = QAction("Insert Date", self)
+        self.menuEditInsertDate = QAction("Insert &Date", self)
         self.menuEditInsertDate.setShortcut("Ctrl+.")
         self.menuEditInsertDate.setStatusTip("Insert current Date to Cursor position")
         self.menuEditInsertDate.triggered.connect(self.insertDate)
         self.menuEdit.addAction(self.menuEditInsertDate)
 
 
-
-        self.menuViewFontChooser = QAction("Choose Font", self)
-        self.menuViewFontChooser.setShortcut("Ctrl+F")
+        # View
+        self.menuViewFontChooser = QAction("Choose &Font", self)
+        self.menuViewFontChooser.setShortcut("Ctrl+Shift+F")
         self.menuViewFontChooser.setStatusTip("Choose a Font to Display your Text in")
         self.menuViewFontChooser.triggered.connect(self.fontChooser)
         self.menuView.addAction(self.menuViewFontChooser)
 
         self.menuView.addSeparator()
-        
-        self.menuViewZoomIn = QAction("Zoom In", self)
+
+        self.menuViewZoomIn = QAction("Zoom &In", self)
         self.menuViewZoomIn.setShortcut("Ctrl++")
         self.menuViewZoomIn.setStatusTip("Zoom In to make Text larger")
         self.menuViewZoomIn.triggered.connect(self.zoomingIn)
         self.menuView.addAction(self.menuViewZoomIn)
 
-        self.menuViewZoomOut = QAction("Zoom Out", self)
+        self.menuViewZoomOut = QAction("Zoom &Out", self)
         self.menuViewZoomOut.setShortcut("Ctrl+-")
         self.menuViewZoomOut.setStatusTip("Zoom Out to make Text smaller")
         self.menuViewZoomOut.triggered.connect(self.zoomingOut)
         self.menuView.addAction(self.menuViewZoomOut)
 
-        self.menuViewZoomBack = QAction("Zoom Back", self)
+        self.menuViewZoomBack = QAction("Zoom &Back", self)
         self.menuViewZoomBack.setShortcut("Ctrl+0")
         self.menuViewZoomBack.setStatusTip("Zoom Back to make Text original Scale")
         self.menuViewZoomBack.triggered.connect(self.zoomingBack)
         self.menuView.addAction(self.menuViewZoomBack)
 
 
-
-        self.menuHelpOpenHelp = QAction("Open Help File", self)
+        # Help
+        self.menuHelpOpenHelp = QAction("Open &Help File", self)
         self.menuHelpOpenHelp.setShortcut("F1")
         self.menuHelpOpenHelp.setStatusTip("Open the Github Repository of ANNOTATEpy")
         self.menuHelpOpenHelp.triggered.connect(self.openHelpFile)
         self.menuHelp.addAction(self.menuHelpOpenHelp)
 
-        self.menuHelpOpenGithub = QAction("Open Github", self)
+        self.menuHelpOpenGithub = QAction("Open on &Github", self)
         self.menuHelpOpenGithub.setShortcut("Ctrl+Alt+P")
         self.menuHelpOpenGithub.setStatusTip("Open the Github Repository of ANNOTATEpy")
         self.menuHelpOpenGithub.triggered.connect(self.openGithub)
@@ -129,24 +131,22 @@ class MainWindow(QMainWindow):
 
     # https://www.binpress.com/building-text-editor-pyqt-1/
     def initMenubar(self):
-
         self.menubar = self.menuBar()
 
         self.menuFile = self.menubar.addMenu("&File")
         self.menuEdit = self.menubar.addMenu("&Edit")
         self.menuView = self.menubar.addMenu("&View")
         self.menuHelp = self.menubar.addMenu("&Help")
+
         self.createMenubarActions()
 
 
     # https://www.youtube.com/watch?v=-2uyzAqefyE
     def initUI(self):
-
-
         self.mainText = QTextEdit(self)
         self.setCentralWidget(self.mainText)
         self.mainText.setUndoRedoEnabled(True)
-        self.newFont = QFont("Arial")
+        self.newFont = QFont("Arial", 12)
         self.mainText.setFont(self.newFont)
 
         self.widget = QWidget()
@@ -174,41 +174,35 @@ class MainWindow(QMainWindow):
     @pyqtSlot()
     def openFile(self):
         if self.fullName:
-            self.fileContentString = files3.openFile(self.fullName)
+            self.fileContentString = files.openFile(self.fullName)
             self.mainText.setText(self.fileContentString)
 
     @pyqtSlot()
     def saveFileDialog(self):
         self.fullName, filters = QFileDialog.getSaveFileName(self, "Save File","","All Filetypes(*);;Text Files (*.txt);;Markdown Files (*.md)")
-        self.saveToOpenedFile()
+        self.saveToFile()
         self.setWindowTitle("ANNOTATEpy  " + self.fullName)
 
     @pyqtSlot()
     def saveAsFileDialog(self):
         self.newFullName, filters = QFileDialog.getSaveFileName(self, "Save As File",os.path.basename(self.fullName),"All Filetypes(*);;Text Files (*.txt);;Markdown Files (*.md)")
         if self.newFullName:
-            self.saveToOpenedFile()
-            self.setWindowTitle("ANNOTATEpy  " + self.fullName)
             self.fullName = self.newFullName
+            self.saveToFile()
+            self.setWindowTitle("ANNOTATEpy  " + self.fullName)
 
     # https://stackoverflow.com/a/25994381
-    @pyqtSlot()
-    def saveToOpenedFile(self):
-        if self.fullName:
-            self.updateCurrentTextContent()
-            files3.saveToFile(self.fullName, self.currentTextContent)
-            self.fileContentString = self.currentTextContent
-            self.updateCurrentTextContent()
-
     @pyqtSlot()
     def saveToFile(self):
         if self.fullName:
             self.updateCurrentTextContent()
-            files3.saveToFile(self.fullName, self.currentTextContent)
+            files.saveToFile(self.fullName, self.currentTextContent)
             self.fileContentString = self.currentTextContent
             self.updateCurrentTextContent()
-        else:
+        elif self.dialogExit == False:
+            self.dialogExit = True
             self.saveFileDialog()
+            self.dialogExit = False
 
     def updateCurrentTextContent(self):
         self.currentTextContent = self.mainText.toPlainText()
@@ -272,11 +266,11 @@ class MainWindow(QMainWindow):
 
     @pyqtSlot()
     def insertDate(self):
-        self.mainText.insertPlainText(date.getDate("%Y"))
+        self.mainText.insertPlainText(date.getDate("%d.%m.%Y"))
 
     @pyqtSlot()
     def openHelpFile(self):
-        self.fileContentString = files3.openFile(".\\res\\docs\\help.txt")
+        self.fileContentString = files.openFile(os.path.normcase(".\\res\\docs\\help.txt"))
         self.mainText.setText(self.fileContentString)
 
     @pyqtSlot()
