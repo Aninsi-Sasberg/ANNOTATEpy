@@ -13,12 +13,15 @@ from PyQt6.QtGui import QAction, QIcon, QFont
 class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
+
+        # initialise window properties
         self.setGeometry(200, 200, 400, 400)
         self.setWindowTitle("ANNOTATEpy")
         self.icon = QIcon()
         self.icon.addFile(os.path.normcase(".\\res\\icon\\ANNOTATEpy.png"))
         self.setWindowIcon(self.icon)
 
+        # initialise variables
         self.fullName = ""
         self.currentTextContent = ""
         self.fileContentString = ""
@@ -28,6 +31,7 @@ class MainWindow(QMainWindow):
 
         self.initUI()
 
+    # create menubar actions, and their shortcuts
     # https://doc.qt.io/qtforpython-5/overviews/qtwidgets-mainwindows-menus-example.html#menus-example
     def createMenubarActions(self):
         # File
@@ -128,7 +132,7 @@ class MainWindow(QMainWindow):
         self.menuHelp.addAction(self.menuHelpOpenGithub)
 
 
-
+    # add menubar menus, and then calling createMenubarActions()
     # https://www.binpress.com/building-text-editor-pyqt-1/
     def initMenubar(self):
         self.menubar = self.menuBar()
@@ -141,6 +145,7 @@ class MainWindow(QMainWindow):
         self.createMenubarActions()
 
 
+    # add QTextEdit as self.mainText, set its placement and attributes
     # https://www.youtube.com/watch?v=-2uyzAqefyE
     def initUI(self):
         self.mainText = QTextEdit(self)
@@ -161,28 +166,31 @@ class MainWindow(QMainWindow):
         self.updateCurrentTextContentSignal = self.mainText.textChanged
         self.updateCurrentTextContentSignal.connect(self.updateCurrentTextContent)
 
+    # displays a file dialog to choose a file to open; calls self.openFile() to actually read the file contents
     # https://www.binpress.com/building-text-editor-pyqt-1/
     @pyqtSlot()
     def openFileDialog(self):
-        # Get filename and show only .writer files
         self.newFullName, filters = QFileDialog.getOpenFileName(self, "Open File","","All Files(*);;Text Files (*.txt)")
         if self.newFullName:
             self.fullName = self.newFullName
             self.openFile()
             self.setWindowTitle("ANNOTATEpy  " + self.fullName)
 
+    # opens file via 'files' openFile(), and then set the contents to self.mainTexts contents
     @pyqtSlot()
     def openFile(self):
         if self.fullName:
             self.fileContentString = files.openFile(self.fullName)
             self.mainText.setText(self.fileContentString)
 
+    # displays a file dialog to choose how to save the file; calls self.saveToOpenedFile() to actually save the file
     @pyqtSlot()
     def saveFileDialog(self):
         self.fullName, filters = QFileDialog.getSaveFileName(self, "Save File","","All Filetypes(*);;Text Files (*.txt);;Markdown Files (*.md)")
         self.saveToFile()
         self.setWindowTitle("ANNOTATEpy  " + self.fullName)
 
+    # displays a file dialog to choose how to save the file if user wants to choose a new file location than currently set in self.fullName; calls self.saveToOpenedFile() to actually save the file
     @pyqtSlot()
     def saveAsFileDialog(self):
         self.newFullName, filters = QFileDialog.getSaveFileName(self, "Save As File",os.path.basename(self.fullName),"All Filetypes(*);;Text Files (*.txt);;Markdown Files (*.md)")
@@ -191,6 +199,7 @@ class MainWindow(QMainWindow):
             self.saveToFile()
             self.setWindowTitle("ANNOTATEpy  " + self.fullName)
 
+    # saves file to self.fullName via 'files' saveToFile() method; updates self.fileContentString; calls self.updateCurrentTextContent();; else if dialog from self.saveFileDialog() wasn't already opened it calls self.saveFileDialog(), prevents user from being caught in a loop if they cancel the dialog
     # https://stackoverflow.com/a/25994381
     @pyqtSlot()
     def saveToFile(self):
@@ -204,6 +213,8 @@ class MainWindow(QMainWindow):
             self.saveFileDialog()
             self.dialogExit = False
 
+
+    # updates self.currentTextContent and checks if it is different to self.fileContentString to see if there are differences between the last save and the current text displayed in self.mainText
     def updateCurrentTextContent(self):
         self.currentTextContent = self.mainText.toPlainText()
 
@@ -217,6 +228,7 @@ class MainWindow(QMainWindow):
         return self.currentTextContent
 
 
+    # utility functions for self.killWhite()
     def splitToLines(self, input):
         output = input.split("\n")
         return output
@@ -225,6 +237,7 @@ class MainWindow(QMainWindow):
         output = "\n".join(input)
         return output
 
+    # deletes unnecessary Whitespace from self.currentTextContent via regex 're' module
     @pyqtSlot()
     def killWhite(self):
         self.tempCurrentTextContentLines = []
@@ -235,6 +248,7 @@ class MainWindow(QMainWindow):
         self.currentTextContent = self.stitchToLine(self.tempCurrentTextContentLines)
         self.mainText.setText(self.currentTextContent)
 
+    # these are self explanatory
     @pyqtSlot()
     def undo(self):
         self.mainText.undo()
@@ -258,26 +272,30 @@ class MainWindow(QMainWindow):
         self.mainText.zoomOut(self.zoomCounter)
         self.zoomCounter = 0
 
+    # opens QFontDialog to let user choose font family, size, weight and style
     # https://codingshiksha.com/python/python-3-pyqt5-file-dialogfont-pickercolor-picker-using-qfontdialog-qcolordialog-widgets-gui-desktop-app-full-project-for-beginners/
     def fontChooser(self):
         self.newFont, self.fontFine = QFontDialog.getFont(self.newFont, self)
         if self.fontFine:
             self.mainText.setFont(self.newFont)
 
+    # crude implementation, very user unfriendly; date format can only be changed through this code
     @pyqtSlot()
     def insertDate(self):
         self.mainText.insertPlainText(date.getDate("%d.%m.%Y"))
 
+    # loads help.txt into self.mainText
     @pyqtSlot()
     def openHelpFile(self):
         self.fileContentString = files.openFile(os.path.normcase(".\\res\\docs\\help.txt"))
         self.mainText.setText(self.fileContentString)
 
+    # opens Github Repository via webbrowser's webOpen function
     @pyqtSlot()
     def openGithub(self):
         webOpen('https://github.com/Aninsi-Sasberg/ANNOTATEpy')
 
-
+# run gui
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     win = MainWindow()
